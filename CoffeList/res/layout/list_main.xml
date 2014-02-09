@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:id="@+id/Linear"
+    android:orientation="horizontal" >
+
+    <ExpandableListView
+        android:id="@+id/elv_list"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:childDivider="#FFFFFF"
+        android:divider="#ffcccccc"
+        android:groupIndicator="@null"
+        android:dividerHeight="1.50dp" />
+
+        <fragment
+            android:id="@+id/fragment2"
+            android:name="com.example.coffelist.activity.fragment_slide"
+            android:layout_width="142dp"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_slide" />
+
+
+</LinearLayout>
