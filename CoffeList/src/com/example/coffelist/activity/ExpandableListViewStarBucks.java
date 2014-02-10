@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -45,6 +46,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	double latPoint = 0;
 	double lngPoint = 0;
 	float  speed = 0;
+	int clickcheck = 1;
 	
 	
 	private ArrayList<String> mGroupList = null;
@@ -66,6 +68,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	private View scateList;
 	private double totalavr;
 	private String totalstring = "";
+	private String listname[] = {};
 	private String name [][] = {{"오늘의 커피","아이스 커피"},{"에스프레소","에스프레소 마키아또","에스프레소 콘 파나","아이스 카페 아메리카노",
 		"카페 아메리카노","두유 카페 라떼","아이스 두유 카페 라떼","아이스 카페 라떼","아이스 카푸치노","카페 라떼","카푸치노","스타벅스 더블 샷","바닐라 라떼",
 		"아이스 바닐라 라떼","아이스 카페 모카","아이스 코코아 카푸치노","카페 모카","코코아 카푸치노","리스트레토 비안코","스타벅스 돌체 라떼","아이스 스타벅스 돌체 라떼",
@@ -258,18 +261,24 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		
 		// 차일???�릭 ?�을 ??
 		mListView.setOnChildClickListener(new OnChildClickListener() {
+			
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 				Toast.makeText(getApplicationContext(), "c click = " + childPosition, 
 						Toast.LENGTH_SHORT).show();
+		
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
 				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				//listname[childPosition] = totalstring;
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);
 				coffename.setText(totalstring);
 				coffeprice.setText("총 금액 : " + total +"원");
+				//Log.d("count", coffename.get);
 				//mListView = (ExpandableListView) findViewById(R.id.elv_list);
+				
+				
 				return false;
 			}
 		});

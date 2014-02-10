@@ -5,6 +5,11 @@
     android:background="#FFFFFF"
     
      >
+     	<ImageView 
+        android:id="@+id/child_image"
+        android:layout_width="20dip"
+        android:layout_height="20dip"
+        />
 
     <TextView
         android:id="@+id/tv_child"

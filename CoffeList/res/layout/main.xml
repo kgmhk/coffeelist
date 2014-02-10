@@ -9,11 +9,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <TabWidget 
+        
+    <HorizontalScrollView
+			android:id="@+id/imageViewHorizontalScroll"
+			android:background="#00FFFFFF"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:scrollbars="horizontal" 
+			android:scrollbarAlwaysDrawHorizontalTrack="true"
+			android:addStatesFromChildren="true">    
+        
+        <TabWidget
             android:id="@android:id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:weightSum="3"/>
+
+        </HorizontalScrollView>
+        
         <FrameLayout 
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"

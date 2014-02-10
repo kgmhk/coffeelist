@@ -35,13 +35,20 @@
             android:name="com.example.coffelist.activity.StarBucks"
             android:label="@string/title_activity_star_bucks" >
         </activity>
-        
+            <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewCoffeBene"
+            android:label="@string/title_activity_star_bucks" >
+        </activity>
         <activity
             android:name="com.example.coffelist.activity.ExpandableListViewStarBucks"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
             android:name="com.example.coffelist.activity.ExpandableListViewHollyCoffe"
+            android:label="@string/title_activity_star_bucks" >
+        </activity>
+        <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewAngel"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity

@@ -29,7 +29,7 @@ public class MainActivity extends TabActivity{
 		
 		//Ã¹ ¹øÂ° ÅÇ
 		intent = new Intent(this, ExpandableListViewStarBucks.class);
-		spec = tabHost.newTabSpec("tab1").setIndicator("\nSTARBUCKS",getResources().getDrawable(R.drawable.starbucks_tab_image)).setContent(intent);
+		spec = tabHost.newTabSpec("tab1").setIndicator("\nSTARBUCKS COFFE",getResources().getDrawable(R.drawable.starbucks_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		//µÎ ¹øÂ° ÅÇ
@@ -37,17 +37,31 @@ public class MainActivity extends TabActivity{
 		spec = tabHost.newTabSpec("tab2").setIndicator("\nHOLLYS COFFE",getResources().getDrawable(R.drawable.hollys_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
 		
+		intent = new Intent(this, ExpandableListViewCoffeBene.class);
+		spec = tabHost.newTabSpec("tab3").setIndicator("\nCoffe Bene",getResources().getDrawable(R.drawable.coffebene_tab_image)).setContent(intent);
+		tabHost.addTab(spec);
+		
 		//¼¼ ¹øÂ° ÅÇ
 		intent = new Intent(this, ExpandableListViewTomnToms.class);
-		spec = tabHost.newTabSpec("tab3").setIndicator("\nTomnToms",getResources().getDrawable(R.drawable.tomntoms_tab_image)).setContent(intent);
+		spec = tabHost.newTabSpec("tab4").setIndicator("\nTomnToms",getResources().getDrawable(R.drawable.tomntoms_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
+		
+		
+		intent = new Intent(this, ExpandableListViewAngel.class);
+		spec = tabHost.newTabSpec("tab4").setIndicator("\nAngel in-us",getResources().getDrawable(R.drawable.angel_tab_image)).setContent(intent);
+		tabHost.addTab(spec);
+		
+
 		
 	 	//tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("starbucks",getResources().getDrawable(R.drawable.ic_launcher)).setContent(new Intent(this, ExpandableListViewStarBucks.class)));
         //tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("Hollys Coffe",getResources().getDrawable(R.drawable.hollys)).setContent(new Intent(this, ExpandableListViewHollyCoffe.class)));
         //tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator("Tom n Toms").setContent(new Intent(this, ExpandableListViewTomnToms.class)));
 
-       // tabHost.getTabWidget().getChildAt(1).setBackgroundColor(Color.WHITE);
-        //tabHost.getTabWidget().getChildAt(0).getLayoutParams().height = 250;
+        //tabHost.getTabWidget().getChildAt(0).setBackgroundColor(R.drawable.starbucks_tab_image);
+		//tabHost.getTabWidget().getChildAt(0).getLayoutParams().height = 110;
+		for(int tab=0; tab< tabHost.getTabWidget().getChildCount(); tab++){
+			tabHost.getTabWidget().getChildAt(tab).getLayoutParams().width = 250;
+		}
         //for(int tab=0; tab< tabHost.getTabWidget().getChildCount(); tab++){
        // 	tabHost.getTabWidget().getChildAt(tab).getLayoutParams().height = 130;
         //}
