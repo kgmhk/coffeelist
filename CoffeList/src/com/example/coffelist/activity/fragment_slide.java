@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coffelist.R;
@@ -16,6 +17,7 @@ import com.example.coffelist.R;
 public class fragment_slide extends Fragment {
 	private Button fragbutton;
 	public int check;
+	private TextView tall;
 	
 	SharedPreferences setting;
 	SharedPreferences.Editor editor;
@@ -23,7 +25,6 @@ public class fragment_slide extends Fragment {
 	@Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	            Bundle savedInstanceState) {
-		
 		// View v = inflater.inflate(R.layout.fragment_slide, container, false);
 		 LinearLayout sampleLayout = (LinearLayout) inflater.inflate(R.layout.fragment_slide ,null);
 		 
@@ -39,6 +40,7 @@ public class fragment_slide extends Fragment {
 			}
 		});
 		  */      
+		
        if(check%2 == 0){
     	   
 	        ft.show(this);

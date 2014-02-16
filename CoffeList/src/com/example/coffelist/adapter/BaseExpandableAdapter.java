@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.R.color;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.example.coffelist.R;
 
 public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 	
+	private Typeface tfsmall;
+	private Typeface tfbold;
 	private ArrayList<String> groupList = null;
 	private ArrayList<ArrayList<String>> childList = null;
 	private LayoutInflater inflater = null;
@@ -29,6 +32,9 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 		this.inflater = LayoutInflater.from(c);
 		this.groupList = groupList;
 		this.childList = childList;
+		
+		tfsmall = Typeface.createFromAsset(c.getAssets(),"fontbold.ttf");
+		tfbold = Typeface.createFromAsset(c.getAssets(), "fontbold.ttf");
 	}
 	
 	// Í∑∏Î£π ?¨Ï??òÏùÑ Î∞òÌôò?úÎã§.
@@ -55,11 +61,14 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 			View convertView, ViewGroup parent) {
 	
 		View v = convertView;
-		
+	
 		if(v == null){
 			viewHolder = new ViewHolder();
 			v = inflater.inflate(R.layout.list_parent, parent, false);
 			viewHolder.tv_groupName = (TextView) v.findViewById(R.id.tv_group);
+			//∆˘∆Æ ¿˚øÎ
+			viewHolder.tv_groupName.setTypeface(tfbold);
+			//myNewFace = Typeface.createFromAsset(getAssets(), "fonts/");
 			viewHolder.iv_image = (ImageView) v.findViewById(R.id.iv_image);
 			
 			v.setTag(viewHolder);
@@ -72,11 +81,11 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 				//Drawable drawable = v.getResources().getDrawable(R.id.starbucksicon);
 				viewHolder.iv_image.setImageResource(R.drawable.ic_action_expand);
 			}else{
-				viewHolder.iv_image.setImageResource(R.drawable.ic_action_next_item);
+				viewHolder.iv_image.setImageResource(R.drawable.coffe);
 			}
 		
 			viewHolder.tv_groupName.setText(getGroup(groupPosition));
-			//viewHolder.tv_groupName.setBackgroundColor(Color.CYAN);		
+			//viewHolder.tv_groupName.setBackgroundColor(R.drawable.parent_background);		
 
 		return v;
 	}
@@ -111,6 +120,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter{
 			v = inflater.inflate(R.layout.list_child, null);
 			viewHolder.child_image = (ImageView) v.findViewById(R.id.child_image);
 			viewHolder.tv_childName = (TextView) v.findViewById(R.id.tv_child);
+			viewHolder.tv_childName.setTypeface(tfsmall);
 			v.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder)v.getTag();

@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.example.coffelist.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,7 +18,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,17 +25,17 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.coffelist.R;
-import com.example.coffelist.adapter.BaseExpandableAdapter;
 
+import com.example.coffelist.adapter.BaseExpandableAdapter;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class ExpandableListViewAngel extends Activity implements LocationListener{
 	
@@ -46,6 +47,19 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 	double lngPoint = 0;
 	float  speed = 0;
 	
+
+	
+	//font setup	
+		private Typeface tfsmall;
+		private Typeface tfbold;
+
+		private TextView tall;
+		private TextView title;
+		private TextView inwon;
+		private TextView number;
+		private TextView check;
+		private TextView maptext;
+		private TextView other;
 	
 	private ArrayList<String> mGroupList = null;
 	private ArrayList<ArrayList<String>> mChildList = null;
@@ -68,8 +82,8 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 	private EditText dutchcal;
 	private String total;
 	private int totalint;
-	public int check;
 	private View scateList;
+	private View fragment;
 	private double totalavr;
 	private String totalstring = "";
 	private String name [][] = {{"더치 아메리카노","아메리카노","에스프레소","드립커피","더치라떼","카라멜마끼아또","화이트초코카페모카","헤이즐넛카페모카","카페모카",
@@ -87,6 +101,8 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 	private Button map;
 	private Button movebutton;
 	private Button young;
+	
+	
 	
 		SharedPreferences setting;
 	SharedPreferences.Editor editor;
@@ -129,6 +145,36 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 		movebutton = (Button) findViewById(R.id.overcalbutton);
 		young = (Button) findViewById(R.id.youngyaung);
 		
+	
+		//young.setText("홈페이지");
+		
+		//font setup
+		tall = (TextView) findViewById(R.id.tall);
+		title = (TextView) findViewById(R.id.title);
+		inwon = (TextView) findViewById(R.id.inwon);
+		number = (TextView) findViewById(R.id.number);
+		check = (TextView) findViewById(R.id.check);
+		
+		tfsmall = Typeface.createFromAsset(getAssets(),"fontbold.ttf");
+		tfbold = Typeface.createFromAsset(getAssets(), "fontbold.ttf");
+		
+		maptext = (TextView) findViewById(R.id.maptext);
+		other = (TextView) findViewById(R.id.other);
+		
+		
+		maptext.setTypeface(tfsmall);
+		other.setTypeface(tfsmall);
+		
+		coffepriceavr.setTypeface(tfsmall);
+		coffeprice.setTypeface(tfsmall);
+		title.setTypeface(tfbold);
+		tall.setTypeface(tfbold);
+		inwon.setTypeface(tfsmall);
+		number.setTypeface(tfsmall);
+		check.setTypeface(tfbold);
+		coffename.setTypeface(tfsmall);
+		
+		other.setText("홈페이지 :");
 		
 		// ExpandableListView ?�정
 		mGroupList = new ArrayList<String>();
@@ -146,7 +192,7 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 
 		mGroupList.add("에스프레소 음료");
 		mGroupList.add("엔젤린-스노우");
-		mGroupList.add("주스＇티＇음료");
+		mGroupList.add("주스 & 티 & 음료");
 
 		//�?번째 그룹??차일??		
 		for(int i=0; i<name[0].length; i++){
@@ -213,7 +259,7 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 			public void onClick(View v){
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				Uri u;
-				u = Uri.parse("http://www.caffebene.co.kr/sub04/nutritionFacts/facts01");
+				u = Uri.parse("http://www.angelinus.co.kr/");
 				intent.setData(u);
 				startActivity(intent);
 				
@@ -295,17 +341,25 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 	
 	public void chgLayoutDisplay(){
 		scateList = (View)findViewById(R.id.elv_list);
+		fragment = (View)findViewById(R.id.fragment2);
+		LinearLayout.LayoutParams f = (android.widget.LinearLayout.LayoutParams) fragment.getLayoutParams();
+		
 		LinearLayout.LayoutParams p = (android.widget.LinearLayout.LayoutParams) scateList.getLayoutParams();
+		float weight = p.weight;
 		
 		int h = p.width;
 		int i = 0;
-		if(h < 500){
-			p.width = 720;
+		if(f.weight < 9){
+			p.weight = 0;
+			f.weight = 10;
+			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
-			Log.d("p.width", String.valueOf(p.width));
+			
 			//p.width -= 0.000005;
-			p.width = 435;
+			p.weight = (float) 3.5;
+			f.weight = (float) 6.5;
+			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}
 	}
@@ -370,6 +424,20 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 	public void onStatusChanged(String s, int i, Bundle bundle) {
 
 	}
+	
+	@Override
+	  public void onStart() {
+	    super.onStart();
+	  
+	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	  }
+
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    
+	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	  }
 
 	/*
 	 * Layout

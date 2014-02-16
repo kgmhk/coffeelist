@@ -3,24 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF"
+    android:background="#FEFEFB"
     android:id="@+id/Linear"
     android:orientation="horizontal" >
 
     <ExpandableListView
         android:id="@+id/elv_list"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:childDivider="#FFFFFF"
-        android:divider="#ffcccccc"
+        android:childDivider="#FFFFFFFF"
+        android:divider="#E8E7E3"
         android:groupIndicator="@null"
-        android:dividerHeight="1.50dp" />
+  		android:layout_weight="0"
+        android:dividerHeight="1dp"
+ 
+         />
 
         <fragment
             android:id="@+id/fragment2"
             android:name="com.example.coffelist.activity.fragment_slide"
-            android:layout_width="142dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="10"
             tools:layout="@layout/fragment_slide" />
 
 

@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />   
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     
     <application
@@ -19,6 +20,7 @@
        	<uses-library android:name="com.google.android.maps"/>
         <activity
             android:name="com.example.coffelist.activity.MainActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar">"
             <intent-filter>
@@ -27,8 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
+        <activity android:name="com.example.coffelist.adpost.AdPostActivity" />
+        
         <activity
             android:name="com.example.coffelist.activity.CoffeList_Splash"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+                <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewDropTop"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
@@ -39,8 +48,20 @@
             android:name="com.example.coffelist.activity.ExpandableListViewCoffeBene"
             android:label="@string/title_activity_star_bucks" >
         </activity>
+         <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewTwosomePlace"
+            android:label="@string/title_activity_star_bucks" >
+        </activity>
+           <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewEdiya"
+            android:label="@string/title_activity_star_bucks" >
+        </activity>
         <activity
             android:name="com.example.coffelist.activity.ExpandableListViewStarBucks"
+            android:label="@string/title_activity_star_bucks" >
+        </activity>
+                <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewPasscucci"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
@@ -52,11 +73,19 @@
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewCoffeBean"
+            android:label="@string/title_activity_star_bucks" >
+        </activity>
+        <activity
             android:name="com.example.coffelist.activity.LocationDemo"
             android:label="@string/title_activity_star_bucks" >
         </activity>
                 <activity
             android:name="com.example.coffelist.activity.ExpandableListViewTomnToms"
+            android:label="@string/title_activity_star_bucks" >
+        </activity>
+        <activity
+            android:name="com.example.coffelist.activity.ExpandableListViewCoffinegurunaru"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity

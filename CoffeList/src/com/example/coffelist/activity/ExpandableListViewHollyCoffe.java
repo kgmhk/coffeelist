@@ -8,6 +8,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 
 import com.example.coffelist.R;
 import com.example.coffelist.adapter.BaseExpandableAdapter;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class ExpandableListViewHollyCoffe extends Activity implements LocationListener{
 
@@ -43,6 +45,18 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 	double latPoint = 0;
 	double lngPoint = 0;
 	float  speed = 0;
+	
+	//font setup	
+		private Typeface tfsmall;
+		private Typeface tfbold;
+
+		private TextView tall;
+		private TextView title;
+		private TextView inwon;
+		private TextView number;
+		private TextView check;
+		private TextView maptext;
+		private TextView other;
 	
 	
 	private ArrayList<String> mGroupList = null;
@@ -57,8 +71,8 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 	private EditText dutchcal;
 	private String total;
 	private int totalint;
-	public int check;
 	private View scateList;
+	private View fragment;
 	private double totalavr;
 	private String totalstring = "";
 	private String name [][] = {{"리얼 벨지안 카페모카","카페 라떼","바닐라 딜라이트","카페 모카","화이트 카페 모카","민트 카페 모카","카페 아메리카노",
@@ -110,6 +124,35 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 		map = (Button) findViewById(R.id.map);
 		movebutton = (Button) findViewById(R.id.overcalbutton);
 		young = (Button) findViewById(R.id.youngyaung);
+		
+
+		//font setup
+		tall = (TextView) findViewById(R.id.tall);
+		title = (TextView) findViewById(R.id.title);
+		inwon = (TextView) findViewById(R.id.inwon);
+		number = (TextView) findViewById(R.id.number);
+		check = (TextView) findViewById(R.id.check);
+		
+		tfsmall = Typeface.createFromAsset(getAssets(),"fontbold.ttf");
+		tfbold = Typeface.createFromAsset(getAssets(), "fontbold.ttf");
+		
+		maptext = (TextView) findViewById(R.id.maptext);
+		other = (TextView) findViewById(R.id.other);
+		
+		
+		maptext.setTypeface(tfsmall);
+		other.setTypeface(tfsmall);
+		
+		coffepriceavr.setTypeface(tfsmall);
+		coffeprice.setTypeface(tfsmall);
+		title.setTypeface(tfbold);
+		tall.setTypeface(tfbold);
+		inwon.setTypeface(tfsmall);
+		number.setTypeface(tfsmall);
+		check.setTypeface(tfbold);
+		coffename.setTypeface(tfsmall);
+		
+		other.setText("영양 정보 :");
 		
 		mGroupList = new ArrayList<String>();
 		mChildList = new ArrayList<ArrayList<String>>();
@@ -255,15 +298,25 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 	
 	public void chgLayoutDisplay(){
 		scateList = (View)findViewById(R.id.elv_list);
+		fragment = (View)findViewById(R.id.fragment2);
+		LinearLayout.LayoutParams f = (android.widget.LinearLayout.LayoutParams) fragment.getLayoutParams();
+		
 		LinearLayout.LayoutParams p = (android.widget.LinearLayout.LayoutParams) scateList.getLayoutParams();
+		float weight = p.weight;
+		
 		int h = p.width;
-		if(h < 500){
-			p.width = 720;
+		int i = 0;
+		if(f.weight < 9){
+			p.weight = 0;
+			f.weight = 10;
+			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
-			Log.d("p.width", String.valueOf(p.width));
+			
 			//p.width -= 0.000005;
-			p.width = 435;
+			p.weight = (float) 3.5;
+			f.weight = (float) 6.5;
+			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}
 	}
@@ -304,7 +357,7 @@ public void GetLocations() {
 			String juso1 = String.valueOf(juso);
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			Uri u;
-			u = Uri.parse("https://maps.google.co.kr/?q=할리스&near=" + juso1);
+			u = Uri.parse("https://maps.google.co.kr/?q=할리스&near=" + juso1 + "&radius=1");
 			intent.setData(u);
 			startActivity(intent);
 				
@@ -329,6 +382,19 @@ public void GetLocations() {
 
 	}
 
+	@Override
+	  public void onStart() {
+	    super.onStart();
+	  
+	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	  }
+
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    
+	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	  }
 
 	/*
 	 * Layout

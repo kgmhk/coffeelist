@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,6 +26,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -35,6 +37,7 @@ import android.widget.Toast;
 
 import com.example.coffelist.R;
 import com.example.coffelist.adapter.BaseExpandableAdapter;
+import com.google.analytics.tracking.android.EasyTracker;
 
 
 public class ExpandableListViewStarBucks extends Activity implements LocationListener{
@@ -49,6 +52,19 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	int clickcheck = 1;
 	
 	
+	//font setup	
+	private Typeface tfsmall;
+	private Typeface tfbold;
+
+	private TextView tall;
+	private TextView title;
+	private TextView inwon;
+	private TextView number;
+	private TextView check;
+	private TextView maptext;
+	private TextView other;
+	
+	
 	private ArrayList<String> mGroupList = null;
 	private ArrayList<ArrayList<String>> mChildList = null;
 	private ArrayList<String> mChildListContent = null;
@@ -61,11 +77,14 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	private TextView coffename;
 	private TextView coffeprice;
 	private TextView coffepriceavr;
+
+	private ImageView iv_image;///////여기까지함
 	private EditText dutchcal;
 	private String total;
 	private int totalint;
-	public int check;
+	//public int check;
 	private View scateList;
+	private View fragment;
 	private double totalavr;
 	private String totalstring = "";
 	private String listname[] = {};
@@ -117,6 +136,9 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		setLayout();
 		
 		
+
+		
+		
 		//location ?�정
         locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
        // locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, this);
@@ -139,6 +161,36 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		young = (Button) findViewById(R.id.youngyaung);
 		
 		
+		
+		
+		//font setup
+		tall = (TextView) findViewById(R.id.tall);
+		title = (TextView) findViewById(R.id.title);
+		inwon = (TextView) findViewById(R.id.inwon);
+		number = (TextView) findViewById(R.id.number);
+		check = (TextView) findViewById(R.id.check);
+		
+		
+		tfsmall = Typeface.createFromAsset(getAssets(),"fontbold.ttf");
+		tfbold = Typeface.createFromAsset(getAssets(), "fontbold.ttf");
+		
+		maptext = (TextView) findViewById(R.id.maptext);
+		other = (TextView) findViewById(R.id.other);
+		
+		
+		maptext.setTypeface(tfsmall);
+		other.setTypeface(tfsmall);
+		coffepriceavr.setTypeface(tfsmall);
+		coffeprice.setTypeface(tfsmall);
+		title.setTypeface(tfbold);
+		tall.setTypeface(tfbold);
+		inwon.setTypeface(tfsmall);
+		number.setTypeface(tfsmall);
+		check.setTypeface(tfbold);
+		coffename.setTypeface(tfsmall);
+		
+		other.setText("영양 정보 :");
+		
 		// ExpandableListView ?�정
 		mGroupList = new ArrayList<String>();
 		mChildList = new ArrayList<ArrayList<String>>();
@@ -147,7 +199,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		mChildListContent3 = new ArrayList<String>();
 		mChildListContent4 = new ArrayList<String>();
 		mChildListContent5 = new ArrayList<String>();
-
+		
 		mGroupList.add("브루드 커피");
 		mGroupList.add("에스프레소");
 		mGroupList.add("프라푸치노");
@@ -304,17 +356,25 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	
 	public void chgLayoutDisplay(){
 		scateList = (View)findViewById(R.id.elv_list);
+		fragment = (View)findViewById(R.id.fragment2);
+		LinearLayout.LayoutParams f = (android.widget.LinearLayout.LayoutParams) fragment.getLayoutParams();
+		
 		LinearLayout.LayoutParams p = (android.widget.LinearLayout.LayoutParams) scateList.getLayoutParams();
+		float weight = p.weight;
 		
 		int h = p.width;
 		int i = 0;
-		if(h < 500){
-			p.width = 720;
+		if(f.weight < 9){
+			p.weight = 0;
+			f.weight = 10;
+			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
-			Log.d("p.width", String.valueOf(p.width));
+			
 			//p.width -= 0.000005;
-			p.width = 435;
+			p.weight = (float) 3.5;
+			f.weight = (float) 6.5;
+			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}
 	}
@@ -355,7 +415,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 			String juso1 = String.valueOf(juso);
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			Uri u;
-			u = Uri.parse("https://maps.google.co.kr/?q=스타벅스&near=" + juso1);
+			u = Uri.parse("https://maps.google.co.kr/?q=스타벅스&near=" + juso1 +"&radius=1");
 			intent.setData(u);
 			startActivity(intent);
 				
@@ -380,6 +440,19 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 
 	}
 
+	@Override
+	  public void onStart() {
+	    super.onStart();
+	  
+	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	  }
+
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    
+	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	  }
 	/*
 	 * Layout
 	 */
