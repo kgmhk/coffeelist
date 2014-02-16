@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.coffelist"
+    package="com.kgh.coffelist"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -19,7 +19,7 @@
         android:label="@string/app_name" >
        	<uses-library android:name="com.google.android.maps"/>
         <activity
-            android:name="com.example.coffelist.activity.MainActivity"
+            android:name="com.kgh.coffelist.activity.MainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar">"
@@ -30,78 +30,78 @@
             </intent-filter>
         </activity>
         <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
-        <activity android:name="com.example.coffelist.adpost.AdPostActivity" />
+        <activity android:name="com.kgh.coffelist.adpost.AdPostActivity" />
         
         <activity
-            android:name="com.example.coffelist.activity.CoffeList_Splash"
+            android:name="com.kgh.coffelist.activity.CoffeList_Splash"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
                 <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewDropTop"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewDropTop"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.StarBucks"
+            android:name="com.kgh.coffelist.activity.StarBucks"
             android:label="@string/title_activity_star_bucks" >
         </activity>
             <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewCoffeBene"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewCoffeBene"
             android:label="@string/title_activity_star_bucks" >
         </activity>
          <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewTwosomePlace"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewTwosomePlace"
             android:label="@string/title_activity_star_bucks" >
         </activity>
            <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewEdiya"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewEdiya"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewStarBucks"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewStarBucks"
             android:label="@string/title_activity_star_bucks" >
         </activity>
                 <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewPasscucci"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewPasscucci"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewHollyCoffe"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewHollyCoffe"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewAngel"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewAngel"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewCoffeBean"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewCoffeBean"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.LocationDemo"
+            android:name="com.kgh.coffelist.activity.LocationDemo"
             android:label="@string/title_activity_star_bucks" >
         </activity>
                 <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewTomnToms"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewTomnToms"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.ExpandableListViewCoffinegurunaru"
+            android:name="com.kgh.coffelist.activity.ExpandableListViewCoffinegurunaru"
             android:label="@string/title_activity_star_bucks" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.Tabs1"
+            android:name="com.kgh.coffelist.activity.Tabs1"
             android:label="@string/title_activity_tabs1" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.Tabs2"
+            android:name="com.kgh.coffelist.activity.Tabs2"
             android:label="@string/title_activity_tabs2" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.Tabs3"
+            android:name="com.kgh.coffelist.activity.Tabs3"
             android:label="@string/title_activity_tabs3" >
         </activity>
         <activity
-            android:name="com.example.coffelist.activity.Tab"
+            android:name="com.kgh.coffelist.activity.Tab"
             android:label="@string/title_activity_tab" >
         </activity>
 

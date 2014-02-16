@@ -21,7 +21,7 @@
 
         <fragment
             android:id="@+id/fragment2"
-            android:name="com.example.coffelist.activity.fragment_slide"
+            android:name="com.kgh.coffelist.activity.fragment_slide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
