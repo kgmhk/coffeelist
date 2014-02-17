@@ -291,8 +291,7 @@ public class ExpandableListViewPasscucci extends Activity implements LocationLis
 		mListView.setOnGroupClickListener(new OnGroupClickListener() {
 			//@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				Toast.makeText(getApplicationContext(), "g click = " + groupPosition, 
-						Toast.LENGTH_SHORT).show();
+			
 				return false;
 			}
 		});
@@ -302,9 +301,7 @@ public class ExpandableListViewPasscucci extends Activity implements LocationLis
 			
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				Toast.makeText(getApplicationContext(), "c click = " + childPosition, 
-						Toast.LENGTH_SHORT).show();
-		
+			
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
 				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
@@ -325,8 +322,7 @@ public class ExpandableListViewPasscucci extends Activity implements LocationLis
 		mListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
 			@Override
 			public void onGroupCollapse(int groupPosition) {
-				Toast.makeText(getApplicationContext(), "g Collapse = " + groupPosition, 
-						Toast.LENGTH_SHORT).show();
+				
 			}
 		});
 		
@@ -334,8 +330,7 @@ public class ExpandableListViewPasscucci extends Activity implements LocationLis
 		mListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 			@Override
 			public void onGroupExpand(int groupPosition) {
-				Toast.makeText(getApplicationContext(), "g Expand = " + groupPosition, 
-						Toast.LENGTH_SHORT).show();
+			
 			}
 		});
 	}
