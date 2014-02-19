@@ -1,12 +1,14 @@
 package com.kgh.coffelist.activity;
 
 import com.kgh.coffelist.R;
-import com.kgh.coffelist.adpost.AdPostActivity;
 import com.nbpcorp.mobilead.sdk.MobileAdListener;
 import com.nbpcorp.mobilead.sdk.MobileAdView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
@@ -33,21 +35,21 @@ public class MainActivity extends TabActivity{
 		TabHost.TabSpec spec;
 		Intent intent;
 	 	
-		//Ã¹ ¹øÂ° ÅÇ
+		//Ã¹ ï¿½ï¿½Â° ï¿½ï¿½
 		intent = new Intent(this, ExpandableListViewStarBucks.class);
 		spec = tabHost.newTabSpec("tab1").setIndicator("\nSTARBUCKS",getResources().getDrawable(R.drawable.starbucks_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
 		
-		//µÎ ¹øÂ° ÅÇ
+		//ï¿½ï¿½ ï¿½ï¿½Â° ï¿½ï¿½
 		intent = new Intent(this, ExpandableListViewHollyCoffe.class);
 		spec = tabHost.newTabSpec("tab2").setIndicator("\nHOLLYS",getResources().getDrawable(R.drawable.hollys_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		intent = new Intent(this, ExpandableListViewCoffeBene.class);
-		spec = tabHost.newTabSpec("tab3").setIndicator("\nCoffe Bene",getResources().getDrawable(R.drawable.coffebene_tab_image)).setContent(intent);
+		spec = tabHost.newTabSpec("tab3").setIndicator("\nCaffeBene",getResources().getDrawable(R.drawable.coffebene_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
 		
-		//¼¼ ¹øÂ° ÅÇ
+		//ï¿½ï¿½ ï¿½ï¿½Â° ï¿½ï¿½
 		intent = new Intent(this, ExpandableListViewTomnToms.class);
 		spec = tabHost.newTabSpec("tab4").setIndicator("\nTomnToms",getResources().getDrawable(R.drawable.tomntoms_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
@@ -58,11 +60,11 @@ public class MainActivity extends TabActivity{
 		tabHost.addTab(spec);
 		
 		intent = new Intent(this, ExpandableListViewPasscucci.class);
-		spec = tabHost.newTabSpec("tab6").setIndicator("\nPASSCUCCI",getResources().getDrawable(R.drawable.pascucci_tab_image)).setContent(intent);
+		spec = tabHost.newTabSpec("tab6").setIndicator("\nPASCUCCI",getResources().getDrawable(R.drawable.pascucci_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		intent = new Intent(this, ExpandableListViewCoffeBean.class);
-		spec = tabHost.newTabSpec("tab7").setIndicator("\nCOFFE BEAN",getResources().getDrawable(R.drawable.coffebean_tab_image)).setContent(intent);
+		spec = tabHost.newTabSpec("tab7").setIndicator("\nCOFFEE BEAN",getResources().getDrawable(R.drawable.coffebean_tab_image)).setContent(intent);
 		tabHost.addTab(spec);
 		
 		intent = new Intent(this, ExpandableListViewCoffinegurunaru.class);
@@ -123,11 +125,12 @@ public class MainActivity extends TabActivity{
 		for(int tab=0; tab< tabHost.getTabWidget().getChildCount(); tab++){
 			getTabHost().getTabWidget().getChildAt(tab).setBackgroundColor(Color.parseColor("#F5F4EC"));
 			tabHost.getTabWidget().getChildAt(tab).getLayoutParams().width = 250;
+			//tabHost.getTabWidget().getChildAt(tab).getLayoutParams().height = 250;
 			TextView tv = (TextView) getTabHost().getTabWidget().getChildAt(tab).findViewById(android.R.id.title);
 			tv.setTextColor(Color.parseColor("#563A3F"));
 		}
 		
-		//Ã¹ ¹øÂ° ÅÇ Selected
+		//Ã¹ ï¿½ï¿½Â° ï¿½ï¿½ Selected
 		getTabHost().getTabWidget().getChildAt(0).setBackgroundColor(Color.parseColor("#563A3F"));
 		TextView tv = (TextView) getTabHost().getTabWidget().getChildAt(0).findViewById(android.R.id.title);
 		tv.setTextColor(Color.parseColor("#F5F4EC"));
@@ -135,6 +138,7 @@ public class MainActivity extends TabActivity{
         //for(int tab=0; tab< tabHost.getTabWidget().getChildCount(); tab++){
        // 	tabHost.getTabWidget().getChildAt(tab).getLayoutParams().height = 130;
         //}
+		
 		adview = (MobileAdView) findViewById(R.id.adview1);
 		adview.setListener(new MobileAdListener() {
 			@Override
@@ -143,21 +147,10 @@ public class MainActivity extends TabActivity{
 				
 			}
 		});
-		adview.setTest(true);
+		adview.setTest(false);
 		adview.setChannelID("mandroid_df99eaa751ae4a9db65b7c09a00641b4");
 		adview.start();
 		
-	}
-	
-	
-	
-	
-	
-	public static void setTabColor(TabHost tabhost) {
-	    for(int i=0;i<tabhost.getTabWidget().getChildCount();i++) {
-	        tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#563A3F")); //unselected
-	    }
-	    tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab()).setBackgroundColor(Color.parseColor("#F5F4EC")); // selected
 	}
 	
 	@Override
@@ -168,18 +161,34 @@ public class MainActivity extends TabActivity{
 			adview.destroy();
 			adview = null;
 		}
-		
 	}
 	
-	public void onDraw(Canvas canvas){
-		Bitmap bit = BitmapFactory.decodeResource(getResources(), R.drawable.tutorial);
-		canvas.drawBitmap(bit,  0, 0, null);
-
-
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu items for use in the action bar
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.overlaybutton, menu);
+	    return super.onCreateOptionsMenu(menu);
 	}
 	
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.actioncalbutton:
+	            Log.d("acton cal", "");
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 	
 
-   
+	public static void setTabColor(TabHost tabhost) {
+	    for(int i=0;i<tabhost.getTabWidget().getChildCount();i++) {
+	        tabhost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#563A3F")); //unselected
+	    }
+	    tabhost.getTabWidget().getChildAt(tabhost.getCurrentTab()).setBackgroundColor(Color.parseColor("#F5F4EC")); // selected
+	}
+	
 }

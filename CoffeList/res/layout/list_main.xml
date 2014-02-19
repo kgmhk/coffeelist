@@ -14,7 +14,7 @@
         android:childDivider="#FFFFFFFF"
         android:divider="#E8E7E3"
         android:groupIndicator="@null"
-  		android:layout_weight="0"
+  		android:layout_weight="1"
         android:dividerHeight="1dp"
  
          />
@@ -24,7 +24,7 @@
             android:name="com.kgh.coffelist.activity.fragment_slide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
+            android:layout_weight="9"
             tools:layout="@layout/fragment_slide" />
 
 

@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -85,6 +86,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	//public int check;
 	private View scateList;
 	private View fragment;
+	private View overlaycalbutton;
 	private double totalavr;
 	private String totalstring = "";
 	private String listname[] = {};
@@ -115,6 +117,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	private Button map;
 	private Button movebutton;
 	private Button young;
+	private Button movebutton1;
 	
 		SharedPreferences setting;
 	SharedPreferences.Editor editor;
@@ -133,9 +136,22 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		win.addContentView(linear, paramlinear);
 		
 		//setContentView(R.layout.list_main);
+	
+		
+		float screenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
+		float screenHeight = getContext().getResources().getDisplayMetrics().heightPixels;
+		Log.i("screenWidth : ", "" + screenWidth);
+		Log.i("screenHeight : ", "" + screenHeight);
+		
+		overlaycalbutton = (View)findViewById(R.id.overcalbutton);
+		LinearLayout.LayoutParams calbutton1 = (android.widget.LinearLayout.LayoutParams) overlaycalbutton.getLayoutParams();
+		
+		/*calbutton1.leftMargin = ((int)screenWidth/5)*4;
+		Log.i("leftmargin : ", "" + calbutton1.leftMargin);
+		calbutton1.topMargin =  ((int)screenHeight/100)*80;
+		Log.i("topMargin : ", "" + calbutton1.topMargin);
+		*/
 		setLayout();
-		
-		
 
 		
 		
@@ -157,9 +173,11 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		calbutton = (Button) findViewById(R.id.calbutton);
 		dutchcal = (EditText)findViewById(R.id.dutchcal);
 		map = (Button) findViewById(R.id.map);
-		movebutton = (Button) findViewById(R.id.overcalbutton);
+		movebutton = (Button) findViewById(R.id.overcalbutton1);
+		movebutton1 = (Button) findViewById(R.id.overcalbutton);
 		young = (Button) findViewById(R.id.youngyaung);
 		
+		movebutton.setVisibility(View.INVISIBLE);
 		
 		
 		
@@ -256,6 +274,15 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 			}
 		});
 	
+		
+		movebutton1.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				//Toast.makeText(ExpandableListViewStarBucks.this, "등록되었습니다", Toast.LENGTH_SHORT).show(); 
+				chgLayoutDisplay();
+			}
+		});
+		
+			
 		// 계산�?fragment move
 		movebutton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
@@ -351,6 +378,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	}
 	
 	public void chgLayoutDisplay(){
+
 		scateList = (View)findViewById(R.id.elv_list);
 		fragment = (View)findViewById(R.id.fragment2);
 		LinearLayout.LayoutParams f = (android.widget.LinearLayout.LayoutParams) fragment.getLayoutParams();
@@ -361,19 +389,21 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		int h = p.width;
 		int i = 0;
 		if(f.weight < 9){
-			p.weight = 0;
-			f.weight = 10;
+			p.weight = 1;
+			f.weight = 9;
 			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
 			
 			//p.width -= 0.000005;
-			p.weight = (float) 3.5;
+			p.weight = (float) 4.5;
 			f.weight = (float) 6.5;
 			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}
 	}
+	
+	
 
 	public void GetLocations() {
 		
@@ -452,6 +482,11 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	/*
 	 * Layout
 	 */
+	  private Context getContext() 
+	  {
+		  return this;
+	  }
+
 	private ExpandableListView mListView;
 
 	private void setLayout(){

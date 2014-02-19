@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -37,6 +38,7 @@ import android.widget.Toast;
 import com.kgh.coffelist.R;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.kgh.coffelist.adapter.BaseExpandableAdapter;
+
 
 
 public class ExpandableListViewCoffinegurunaru extends Activity implements LocationListener{
@@ -109,6 +111,7 @@ public class ExpandableListViewCoffinegurunaru extends Activity implements Locat
 	private Button map;
 	private Button movebutton;
 	private Button young;
+	private Button movebutton1;
 	
 		SharedPreferences setting;
 	SharedPreferences.Editor editor;
@@ -151,7 +154,9 @@ public class ExpandableListViewCoffinegurunaru extends Activity implements Locat
 		movebutton = (Button) findViewById(R.id.overcalbutton);
 		young = (Button) findViewById(R.id.youngyaung);
 		size = (TextView) findViewById(R.id.tall);
+		movebutton1 = (Button) findViewById(R.id.overcalbutton1);
 		
+		movebutton1.setVisibility(View.INVISIBLE);
 		
 		//font setup
 		//tall = (TextView) findViewById(R.id.tall);
@@ -263,6 +268,13 @@ public class ExpandableListViewCoffinegurunaru extends Activity implements Locat
 				}
 			}
 		});
+		
+		movebutton1.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				chgLayoutDisplay();
+				//chgLayoutDisplay();
+			}
+		});
 	
 		// 계산�?fragment move
 		movebutton.setOnClickListener(new Button.OnClickListener(){
@@ -370,18 +382,20 @@ public class ExpandableListViewCoffinegurunaru extends Activity implements Locat
 		int h = p.width;
 		int i = 0;
 		if(f.weight < 9){
-			p.weight = 0;
-			f.weight = 10;
+			p.weight = 1;
+			f.weight = 9;
 			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
 			
 			//p.width -= 0.000005;
-			p.weight = (float) 3.5;
+			p.weight = (float) 4.5;
 			f.weight = (float) 6.5;
 			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}
+		
+		
 	}
 
 	public void GetLocations() {

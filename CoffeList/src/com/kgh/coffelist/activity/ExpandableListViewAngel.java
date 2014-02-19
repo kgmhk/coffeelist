@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.kgh.coffelist.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -32,7 +34,6 @@ import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.kgh.coffelist.adapter.BaseExpandableAdapter;
@@ -101,6 +102,7 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 	private Button map;
 	private Button movebutton;
 	private Button young;
+	private Button movebutton1;
 	
 	
 	
@@ -144,8 +146,8 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 		map = (Button) findViewById(R.id.map);
 		movebutton = (Button) findViewById(R.id.overcalbutton);
 		young = (Button) findViewById(R.id.youngyaung);
-		
-	
+		movebutton1 = (Button) findViewById(R.id.overcalbutton1);
+		movebutton1.setVisibility(View.INVISIBLE);
 		//young.setText("홈페이지");
 		
 		//font setup
@@ -246,6 +248,15 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 			}
 		});
 	
+		
+		movebutton1.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				//Toast.makeText(ExpandableListViewAngel.this, "등록되었습니다", Toast.LENGTH_SHORT).show(); 
+				chgLayoutDisplay();
+				//chgLayoutDisplay();
+			}
+		});
+		
 		// 계산�?fragment move
 		movebutton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
@@ -347,14 +358,14 @@ public class ExpandableListViewAngel extends Activity implements LocationListene
 		int h = p.width;
 		int i = 0;
 		if(f.weight < 9){
-			p.weight = 0;
-			f.weight = 10;
+			p.weight = 1;
+			f.weight = 9;
 			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
 			
 			//p.width -= 0.000005;
-			p.weight = (float) 3.5;
+			p.weight = (float) 4.5;
 			f.weight = (float) 6.5;
 			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);

@@ -5,45 +5,58 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="fill_parent"
-        android:layout_height="486dp"
-        android:layout_weight="2.75" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <HorizontalScrollView
-                android:id="@+id/imageViewHorizontalScroll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:addStatesFromChildren="true"
-                android:background="#00FFFFFF"
-                android:scrollbarAlwaysDrawHorizontalTrack="true"
-                android:scrollbars="horizontal" >
-
-                <TabWidget
-                    android:id="@android:id/tabs"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:weightSum="3" />
-            </HorizontalScrollView>
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
-
-    <com.nbpcorp.mobilead.sdk.MobileAdView
-        android:id="@+id/adview1"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0" />
+        android:layout_weight="2.25"
+        android:orientation="vertical" >
+
+        <TabHost
+            android:id="@android:id/tabhost"
+            android:layout_width="fill_parent"
+            android:layout_height="486dp"
+            android:layout_weight="2.75" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <HorizontalScrollView
+                    android:id="@+id/imageViewHorizontalScroll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:addStatesFromChildren="true"
+                    android:background="#00FFFFFF"
+                    android:scrollbarAlwaysDrawHorizontalTrack="true"
+                    android:scrollbars="horizontal" >
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:weightSum="3" />
+                </HorizontalScrollView>
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.nbpcorp.mobilead.sdk.MobileAdView
+             android:id="@+id/adview1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             android:layout_weight="0" />
+    </LinearLayout>
 
 </LinearLayout>

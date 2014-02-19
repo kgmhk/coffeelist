@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -89,6 +90,7 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 	private Button map;
 	private Button movebutton;
 	private Button young;
+	private Button movebutton1;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +126,8 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 		map = (Button) findViewById(R.id.map);
 		movebutton = (Button) findViewById(R.id.overcalbutton);
 		young = (Button) findViewById(R.id.youngyaung);
-		
+		movebutton1 = (Button) findViewById(R.id.overcalbutton1);
+		movebutton1.setVisibility(View.INVISIBLE);
 
 		//font setup
 		tall = (TextView) findViewById(R.id.tall);
@@ -201,6 +204,13 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 				String avrstr = Integer.toString((int)totalavr);
 				coffepriceavr.setText("---------------\n" +"총 인원 : " + inwon + "명\n" + "1  인당: " +avrstr +"원");
 				}
+			}
+		});
+		
+		movebutton1.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				chgLayoutDisplay();
+				//chgLayoutDisplay();
 			}
 		});
 		
@@ -303,14 +313,14 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 		int h = p.width;
 		int i = 0;
 		if(f.weight < 9){
-			p.weight = 0;
-			f.weight = 10;
+			p.weight = 1;
+			f.weight = 9;
 			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
 			
 			//p.width -= 0.000005;
-			p.weight = (float) 3.5;
+			p.weight = (float) 4.5;
 			f.weight = (float) 6.5;
 			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);

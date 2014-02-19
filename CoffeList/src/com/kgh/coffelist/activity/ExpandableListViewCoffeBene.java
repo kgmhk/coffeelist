@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -21,10 +22,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -47,19 +50,21 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 	double latPoint = 0;
 	double lngPoint = 0;
 	float  speed = 0;
+	int clickcheck = 1;
 	
 	
 	//font setup	
-		private Typeface tfsmall;
-		private Typeface tfbold;
+	private Typeface tfsmall;
+	private Typeface tfbold;
 
-		private TextView tall;
-		private TextView title;
-		private TextView inwon;
-		private TextView number;
-		private TextView check;
-		private TextView maptext;
-		private TextView other;
+	private TextView tall;
+	private TextView title;
+	private TextView inwon;
+	private TextView number;
+	private TextView check;
+	private TextView maptext;
+	private TextView other;
+	
 	
 	private ArrayList<String> mGroupList = null;
 	private ArrayList<ArrayList<String>> mChildList = null;
@@ -72,20 +77,23 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 	private ArrayList<String> mChildListContent7 = null;
 	private ArrayList<String> mChildListContent8 = null;
 	private ArrayList<String> mChildListContent9 = null;
-	private ArrayList<String> mChildListContent10 = null;
-	
 	
 	//계산???�어�?TextView
 	private TextView coffename;
 	private TextView coffeprice;
 	private TextView coffepriceavr;
+
+	private ImageView iv_image;///////여기까지함
 	private EditText dutchcal;
 	private String total;
 	private int totalint;
+	//public int check;
 	private View scateList;
 	private View fragment;
+	private View overlaycalbutton;
 	private double totalavr;
 	private String totalstring = "";
+	private String listname[] = {};
 	private String name [][] = {{"아메리카노","에스프레소","에스프레소(콘파냐/마끼야또)","아포가또","카라멜 마끼아또","카페모카/화이트모카",
 		"바닐라라떼/크림카라멜라떼","크림망뜨라떼(민트라떼)","카페라떼","카푸치노"},{"브라질/콜롬비아","케냐/에디오피아"},{"에스프레소 초코칩 프라페노","카라멜 프라페노",
 			"모카 프라페노","화이트 모카 프라페노","미숫가루 프라페노","그린티 프라페노","초코칩 프라페노","망뜨초코(민트초코) 프라페노","플레인 스무디",
@@ -106,6 +114,7 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 	private Button map;
 	private Button movebutton;
 	private Button young;
+	private Button movebutton1;
 	
 		SharedPreferences setting;
 	SharedPreferences.Editor editor;
@@ -124,7 +133,23 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		win.addContentView(linear, paramlinear);
 		
 		//setContentView(R.layout.list_main);
+	
+		
+		float screenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
+		float screenHeight = getContext().getResources().getDisplayMetrics().heightPixels;
+		Log.i("screenWidth : ", "" + screenWidth);
+		Log.i("screenHeight : ", "" + screenHeight);
+		
+		overlaycalbutton = (View)findViewById(R.id.overcalbutton);
+		LinearLayout.LayoutParams calbutton1 = (android.widget.LinearLayout.LayoutParams) overlaycalbutton.getLayoutParams();
+		
+		/*calbutton1.leftMargin = ((int)screenWidth/5)*4;
+		Log.i("leftmargin : ", "" + calbutton1.leftMargin);
+		calbutton1.topMargin =  ((int)screenHeight/100)*80;
+		Log.i("topMargin : ", "" + calbutton1.topMargin);
+		*/
 		setLayout();
+
 		
 		
 		//location ?�정
@@ -145,16 +170,20 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		calbutton = (Button) findViewById(R.id.calbutton);
 		dutchcal = (EditText)findViewById(R.id.dutchcal);
 		map = (Button) findViewById(R.id.map);
-		movebutton = (Button) findViewById(R.id.overcalbutton);
+		movebutton = (Button) findViewById(R.id.overcalbutton1);
+		movebutton1 = (Button) findViewById(R.id.overcalbutton);
 		young = (Button) findViewById(R.id.youngyaung);
 		
-	
+		movebutton.setVisibility(View.INVISIBLE);
+		
+		
 		//font setup
 		tall = (TextView) findViewById(R.id.tall);
 		title = (TextView) findViewById(R.id.title);
 		inwon = (TextView) findViewById(R.id.inwon);
 		number = (TextView) findViewById(R.id.number);
 		check = (TextView) findViewById(R.id.check);
+		
 		
 		tfsmall = Typeface.createFromAsset(getAssets(),"fontbold.ttf");
 		tfbold = Typeface.createFromAsset(getAssets(), "fontbold.ttf");
@@ -165,7 +194,6 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		
 		maptext.setTypeface(tfsmall);
 		other.setTypeface(tfsmall);
-		
 		coffepriceavr.setTypeface(tfsmall);
 		coffeprice.setTypeface(tfsmall);
 		title.setTypeface(tfbold);
@@ -176,6 +204,7 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		coffename.setTypeface(tfsmall);
 		
 		other.setText("영양 정보 :");
+		
 		// ExpandableListView ?�정
 		mGroupList = new ArrayList<String>();
 		mChildList = new ArrayList<ArrayList<String>>();
@@ -188,8 +217,7 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		mChildListContent7 = new ArrayList<String>();
 		mChildListContent8 = new ArrayList<String>();
 		mChildListContent9 = new ArrayList<String>();
-		mChildListContent10 = new ArrayList<String>();
-
+		
 		mGroupList.add("커피");
 		mGroupList.add("싱글 오리진");
 		mGroupList.add("프라페노");
@@ -252,7 +280,6 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		Log.d("name9", String.valueOf(price[8].length));
 
 		
-		
 		mChildList.add(mChildListContent);
 		mChildList.add(mChildListContent2);
 		mChildList.add(mChildListContent3);
@@ -262,7 +289,6 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		mChildList.add(mChildListContent7);
 		mChildList.add(mChildListContent8);
 		mChildList.add(mChildListContent9);
-		
 		mListView.setAdapter(new BaseExpandableAdapter(this, mGroupList, mChildList));
 		
 		// dutch Text Setting
@@ -287,6 +313,15 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 			}
 		});
 	
+		
+		movebutton1.setOnClickListener(new OnClickListener(){
+			public void onClick(View v){
+				//Toast.makeText(ExpandableListViewCoffeBene.this, "등록되었습니다", Toast.LENGTH_SHORT).show(); 
+				chgLayoutDisplay();
+			}
+		});
+		
+			
 		// 계산�?fragment move
 		movebutton.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
@@ -294,7 +329,6 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 			}
 		});
 		
-		//young.setVisibility(View.VISIBLE);
 		// ?�양 ?�보 버튼
 		young.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
@@ -337,25 +371,30 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		mListView.setOnGroupClickListener(new OnGroupClickListener() {
 			//@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				
+			
 				return false;
 			}
 		});
 		
 		// 차일???�릭 ?�을 ??
 		mListView.setOnChildClickListener(new OnChildClickListener() {
+			
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				Toast.makeText(getApplicationContext(), "c click = " + childPosition, 
-						Toast.LENGTH_SHORT).show();
+				
+		
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
 				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				//listname[childPosition] = totalstring;
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);
 				coffename.setText(totalstring);
 				coffeprice.setText("총 금액 : " + total +"원");
+				//Log.d("count", coffename.get);
 				//mListView = (ExpandableListView) findViewById(R.id.elv_list);
+				
+				
 				return false;
 			}
 		});
@@ -372,12 +411,13 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		mListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 			@Override
 			public void onGroupExpand(int groupPosition) {
-
+			
 			}
 		});
 	}
 	
 	public void chgLayoutDisplay(){
+
 		scateList = (View)findViewById(R.id.elv_list);
 		fragment = (View)findViewById(R.id.fragment2);
 		LinearLayout.LayoutParams f = (android.widget.LinearLayout.LayoutParams) fragment.getLayoutParams();
@@ -388,19 +428,21 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 		int h = p.width;
 		int i = 0;
 		if(f.weight < 9){
-			p.weight = 0;
-			f.weight = 10;
+			p.weight = 1;
+			f.weight = 9;
 			Log.d("p.weight < 0.9", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}else{
 			
 			//p.width -= 0.000005;
-			p.weight = (float) 3.5;
+			p.weight = (float) 4.5;
 			f.weight = (float) 6.5;
 			Log.d("p.weight > 1", String.valueOf(p.weight));
 			scateList.setLayoutParams(p);
 		}
 	}
+	
+	
 
 	public void GetLocations() {
 		
@@ -438,7 +480,7 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 			String juso1 = String.valueOf(juso);
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			Uri u;
-			u = Uri.parse("https://maps.google.co.kr/?q=카페베네&near=" + juso1);
+			u = Uri.parse("https://maps.google.co.kr/?q=카페베네&near=" + juso1 +"&radius=1");
 			intent.setData(u);
 			startActivity(intent);
 				
@@ -479,6 +521,11 @@ public class ExpandableListViewCoffeBene extends Activity implements LocationLis
 	/*
 	 * Layout
 	 */
+	  private Context getContext() 
+	  {
+		  return this;
+	  }
+
 	private ExpandableListView mListView;
 
 	private void setLayout(){
