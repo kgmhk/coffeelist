@@ -122,9 +122,9 @@ public final class R {
         public static final int actioncalbutton=0x7f0a0027;
         public static final int adview1=0x7f0a0024;
         public static final int calbutton=0x7f0a000c;
-        public static final int check=0x7f0a0011;
+        public static final int check=0x7f0a0012;
         public static final int child_image=0x7f0a0013;
-        public static final int coffename=0x7f0a0012;
+        public static final int coffename=0x7f0a0011;
         public static final int coffeprice=0x7f0a0007;
         public static final int coffepriceavr=0x7f0a0008;
         public static final int dialogButtonOK=0x7f0a0002;

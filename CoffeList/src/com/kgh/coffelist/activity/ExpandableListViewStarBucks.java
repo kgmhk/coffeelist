@@ -19,8 +19,11 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -51,6 +54,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 	double lngPoint = 0;
 	float  speed = 0;
 	int clickcheck = 1;
+	private int selected = 0;
 	
 	
 	//font setup	
@@ -207,6 +211,9 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		check.setTypeface(tfbold);
 		coffename.setTypeface(tfsmall);
 		
+		check.setMovementMethod(ScrollingMovementMethod.getInstance());
+		coffename.setMovementMethod(ScrollingMovementMethod.getInstance());
+		
 		other.setText("영양 정보 :");
 		
 		// ExpandableListView ?�정
@@ -306,7 +313,48 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 		map.setOnClickListener(new Button.OnClickListener(){
 			public void onClick(View v){
 				Log.d("button click", "button");
-				GetLocations();
+				//GetLocations();
+				
+				StringBuffer juso = new StringBuffer();
+
+				Log.d("getlocation in", "in");
+				
+				if (myLocation != null) {
+					latPoint = myLocation.getLatitude();
+					lngPoint = myLocation.getLongitude();
+					Log.d("latPoint", String.valueOf(latPoint));
+					//speed = (float)(myLocation.getSpeed() * 3.6);
+				try {
+					Log.d("juso in", String.valueOf(latPoint));
+					Log.d("juso in", String.valueOf(lngPoint));
+						// �꾨�?寃쎈룄瑜��?�슜�섏�?�꾩??�꾩?���二?�냼?��媛�졇�?�떎. 
+						List<Address> addresses;
+						addresses = geoCoder.getFromLocation(latPoint, lngPoint, 1);
+						Log.d("addresses after", String.valueOf(lngPoint));
+						for(Address addr: addresses){
+							Log.d("for in", String.valueOf(lngPoint));
+							int index = addr.getMaxAddressLineIndex();
+							for(int i=0;i<=index;i++){
+								Log.d("2:for in", String.valueOf(lngPoint));
+								juso.append(addr.getAddressLine(i));
+								juso.append(" ");
+							}
+							Log.d("1:for end", String.valueOf(lngPoint));
+							juso.append("\n");
+						}
+						Log.d("2:for end", String.valueOf(lngPoint));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					String juso1 = String.valueOf(juso);
+					
+					Uri u;
+					u = Uri.parse("https://maps.google.co.kr/?q=스타벅스&near=" + juso1 +"&radius=1");
+					Intent intent = new Intent(Intent.ACTION_VIEW,u);
+					//intent.setData(u);
+					startActivity(intent);
+						
+				}		
 				
 				
 			}
@@ -325,6 +373,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 				coffename.setText("");
 				coffepriceavr.setText("");
 				coffeprice.setText("");
+				selected = 0;
 			}
 		});
 		
@@ -344,9 +393,15 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 				
 		
+				selected++;
+				
+				//if(selected > 15){
+				//	Toast.makeText(ExpandableListViewStarBucks.this, "더 이상 선택하실 수 없습니다.", Toast.LENGTH_SHORT).show(); 
+				//}else{
+					
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
-				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				totalstring += ">" + name[groupPosition][childPosition] + "\n";
 				//listname[childPosition] = totalstring;
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);
@@ -355,7 +410,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 				//Log.d("count", coffename.get);
 				//mListView = (ExpandableListView) findViewById(R.id.elv_list);
 				
-				
+				//}
 				return false;
 			}
 		});
@@ -407,7 +462,7 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 
 	public void GetLocations() {
 		
-		StringBuffer juso = new StringBuffer();
+		/*StringBuffer juso = new StringBuffer();
 
 		Log.d("getlocation in", "in");
 		
@@ -439,15 +494,34 @@ public class ExpandableListViewStarBucks extends Activity implements LocationLis
 				e.printStackTrace();
 			}
 			String juso1 = String.valueOf(juso);
-			Intent intent = new Intent(Intent.ACTION_VIEW);
+			
 			Uri u;
 			u = Uri.parse("https://maps.google.co.kr/?q=스타벅스&near=" + juso1 +"&radius=1");
-			intent.setData(u);
+			Intent intent = new Intent(Intent.ACTION_VIEW,u);
+			//intent.setData(u);
 			startActivity(intent);
 				
 		}		
-			
+			*/
 	}
+
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+	if (keyCode == KeyEvent.KEYCODE_MENU) {
+		//Toast.makeText(ExpandableListViewStarBucks.this, "메뉴", Toast.LENGTH_SHORT).show();
+	return false;
+	}
+	
+	if (keyCode == KeyEvent.KEYCODE_SETTINGS) {
+		Toast.makeText(ExpandableListViewStarBucks.this, "셋팅", Toast.LENGTH_SHORT).show();
+	return false;
+	}
+
+	return super.onKeyDown(keyCode, event);
+	}
+
 
 	public void onLocationChanged(Location location) {
 		Log.d("location", "location changed");

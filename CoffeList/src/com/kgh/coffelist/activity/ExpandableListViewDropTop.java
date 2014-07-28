@@ -19,6 +19,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -170,6 +171,9 @@ public class ExpandableListViewDropTop extends Activity implements LocationListe
 		check.setTypeface(tfbold);
 		coffename.setTypeface(tfsmall);
 		
+		check.setMovementMethod(ScrollingMovementMethod.getInstance());
+		coffename.setMovementMethod(ScrollingMovementMethod.getInstance());
+		
 		other.setText("제휴정보 :");
 		// ExpandableListView ?�정
 		mGroupList = new ArrayList<String>();
@@ -306,7 +310,7 @@ public class ExpandableListViewDropTop extends Activity implements LocationListe
 		
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
-				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				totalstring += ">" + name[groupPosition][childPosition] + "\n";
 				//listname[childPosition] = totalstring;
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);

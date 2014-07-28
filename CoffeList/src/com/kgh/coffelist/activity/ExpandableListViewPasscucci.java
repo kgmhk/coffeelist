@@ -19,6 +19,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -170,6 +171,8 @@ public class ExpandableListViewPasscucci extends Activity implements LocationLis
 		maptext = (TextView) findViewById(R.id.maptext);
 		other = (TextView) findViewById(R.id.other);
 		
+		check.setMovementMethod(ScrollingMovementMethod.getInstance());
+		coffename.setMovementMethod(ScrollingMovementMethod.getInstance());
 	
 		
 		maptext.setTypeface(tfsmall);
@@ -315,7 +318,7 @@ public class ExpandableListViewPasscucci extends Activity implements LocationLis
 			
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
-				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				totalstring += ">" + name[groupPosition][childPosition] + "\n";
 				//listname[childPosition] = totalstring;
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);

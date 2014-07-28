@@ -19,6 +19,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -202,6 +203,9 @@ public class ExpandableListViewCoffeBean extends Activity implements LocationLis
 		check.setTypeface(tfbold);
 		coffename.setTypeface(tfsmall);
 		
+		check.setMovementMethod(ScrollingMovementMethod.getInstance());
+		coffename.setMovementMethod(ScrollingMovementMethod.getInstance());
+		
 		other.setText("홈페이지 :");
 		
 		// ExpandableListView ?�정
@@ -343,7 +347,7 @@ public class ExpandableListViewCoffeBean extends Activity implements LocationLis
 		
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
-				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				totalstring += ">" + name[groupPosition][childPosition] + "\n";
 				//listname[childPosition] = totalstring;
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);

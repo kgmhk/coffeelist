@@ -16,6 +16,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -155,6 +156,9 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 		check.setTypeface(tfbold);
 		coffename.setTypeface(tfsmall);
 		
+		check.setMovementMethod(ScrollingMovementMethod.getInstance());
+		coffename.setMovementMethod(ScrollingMovementMethod.getInstance());
+		
 		other.setText("영양 정보 :");
 		
 		mGroupList = new ArrayList<String>();
@@ -275,7 +279,7 @@ public class ExpandableListViewHollyCoffe extends Activity implements LocationLi
 			
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
-				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				totalstring += ">" + name[groupPosition][childPosition] + "\n";
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);
 				coffename.setText(totalstring);

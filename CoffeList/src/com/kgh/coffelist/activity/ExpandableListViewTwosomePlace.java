@@ -19,6 +19,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -176,6 +177,9 @@ public class ExpandableListViewTwosomePlace extends Activity implements Location
 		maptext = (TextView) findViewById(R.id.maptext);
 		other = (TextView) findViewById(R.id.other);
 		
+		
+		check.setMovementMethod(ScrollingMovementMethod.getInstance());
+		coffename.setMovementMethod(ScrollingMovementMethod.getInstance());
 		
 		maptext.setTypeface(tfsmall);
 		other.setTypeface(tfsmall);
@@ -347,7 +351,7 @@ public class ExpandableListViewTwosomePlace extends Activity implements Location
 		
 				
 				//coffepriceavr.setText(Integer.toString(cnt) + "??);
-				totalstring += "◎" + name[groupPosition][childPosition] + "\n";
+				totalstring += ">" + name[groupPosition][childPosition] + "\n";
 				//listname[childPosition] = totalstring;
 				totalint += price[groupPosition][childPosition];
 				total = Integer.toString(totalint);
